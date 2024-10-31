@@ -1,5 +1,5 @@
+from datetime import datetime
 from pathlib import Path
-from typing import List
 
 from meme_generator import add_meme
 from meme_generator.utils import FrameAlignPolicy, Maker, make_gif_or_combined_gif
@@ -8,7 +8,7 @@ from pil_utils import BuildImage
 img_dir = Path(__file__).parent / "images"
 
 
-def fleshlight(images: List[BuildImage], texts, args):
+def fleshlight(images: list[BuildImage], texts, args):
     params = [
         (((0, 6), (205, 0), (213, 157), (8, 171)), (117, 59)),
         (((0, 6), (205, 0), (213, 157), (8, 171)), (117, 59)),
@@ -47,8 +47,8 @@ def fleshlight(images: List[BuildImage], texts, args):
     ]
 
     def maker(i: int) -> Maker:
-        def make(img: BuildImage) -> BuildImage:
-            img = img.convert("RGBA").resize((210, 170), keep_ratio=True)
+        def make(imgs: list[BuildImage]) -> BuildImage:
+            img = imgs[0].convert("RGBA").resize((210, 170), keep_ratio=True)
             frame = BuildImage.open(img_dir / f"{i}.png")
             points, pos = params[i]
             frame.paste(img.perspective(points), pos, below=True)
@@ -57,8 +57,16 @@ def fleshlight(images: List[BuildImage], texts, args):
         return make
 
     return make_gif_or_combined_gif(
-        images[0], maker, 34, 0.1, FrameAlignPolicy.extend_first
+        images, maker, 34, 0.1, FrameAlignPolicy.extend_first
     )
 
 
-add_meme("fleshlight", fleshlight, min_images=1, max_images=1, keywords=["飞机杯"])
+add_meme(
+    "fleshlight",
+    fleshlight,
+    min_images=1,
+    max_images=1,
+    keywords=["飞机杯"],
+    date_created=datetime(2023, 4, 29),
+    date_modified=datetime(2023, 4, 29),
+)

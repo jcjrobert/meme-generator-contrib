@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 
 from meme_generator import add_meme
@@ -30,4 +31,12 @@ def lash(images: list[BuildImage], texts, args):
     return save_gif(frames, 0.05)
 
 
-add_meme("lash", lash, min_images=2, max_images=2, keywords=["鞭笞", "鞭打", "鞭挞", "鞭策"])
+add_meme(
+    "lash",
+    lash,
+    min_images=2,
+    max_images=2,
+    keywords=["鞭笞", "鞭打", "鞭挞", "鞭策"],
+    date_created=datetime(2024, 7, 23),
+    date_modified=datetime(2024, 7, 23),
+)

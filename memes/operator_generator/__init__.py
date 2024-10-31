@@ -1,6 +1,6 @@
 import random
+from datetime import datetime
 from pathlib import Path
-from typing import List
 
 from meme_generator import add_meme
 from pil_utils import BuildImage
@@ -8,7 +8,7 @@ from pil_utils import BuildImage
 img_dir = Path(__file__).parent / "images"
 
 
-def operator_generator(images: List[BuildImage], texts: List[str], args):
+def operator_generator(images: list[BuildImage], texts: list[str], args):
     img = images[0].convert("RGBA").circle().resize((80, 80))
     name = texts[0] if texts else "你好"
 
@@ -61,4 +61,6 @@ add_meme(
     max_images=1,
     max_texts=1,
     keywords=["合成大干员"],
+    date_created=datetime(2023, 3, 28),
+    date_modified=datetime(2023, 3, 28),
 )
